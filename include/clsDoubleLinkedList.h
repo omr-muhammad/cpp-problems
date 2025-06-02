@@ -85,6 +85,30 @@ public:
         _size++;
     }
 
+    void insertAfter(Node *node, const T &value)
+    {
+        if (node == nullptr || find(node->value) == nullptr)
+        {
+            cout << "Node not found." << endl;
+            return;
+        }
+
+        // Setting up newNode
+        Node *newNode = new Node;
+        newNode->value = value;
+        newNode->next = node->next;
+        newNode->prev = node;
+
+        // Update List Nodes
+        if (node != tail)
+            newNode->next->prev = newNode;
+        else
+            tail = newNode;
+
+        node->next = newNode;
+        _size++;
+    }
+
     Node *find(const T &value) const
     {
         Node *cur = head;
