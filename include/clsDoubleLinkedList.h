@@ -20,16 +20,16 @@ public:
     {
     public:
         T value;
-        Node *next = NULL;
-        Node *prev = NULL;
+        Node *next = nullptr;
+        Node *prev = nullptr;
     };
 
-    Node *head = NULL;
-    Node *tail = NULL;
+    Node *head = nullptr;
+    Node *tail = nullptr;
 
     void print() const
     {
-        if (head == NULL)
+        if (head == nullptr)
         {
             cout << "List is empty." << endl;
             return;
@@ -50,10 +50,10 @@ public:
         newNode->value = value;
         newNode->next = head;
 
-        if (head == NULL)
+        if (head == nullptr)
         {
             head = tail = newNode;
-            // [next, prev] are initially NULL
+            // [next, prev] are initially nullptr
         }
         else
         {
@@ -63,6 +63,20 @@ public:
         }
 
         _size++;
+    }
+
+    Node *find(const T &value) const
+    {
+        Node *cur = head;
+        while (cur != nullptr)
+        {
+            if (cur->value == value)
+                return cur;
+
+            cur = cur->next;
+        }
+
+        return nullptr; // Not found 😢
     }
 };
 #endif // CLS_DOUBLE_LINKED_LIST_H
