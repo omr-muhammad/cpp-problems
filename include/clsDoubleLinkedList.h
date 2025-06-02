@@ -5,33 +5,39 @@
 
 #include <iostream>
 #include <list>
+#include <algorithm>
 
 using namespace std;
 
 template <typename T>
 class clsDoubleLinkedList
 {
-private:
-    list<T> _dbList;
-    size_t _size = 0;
-
 public:
-    // Default constructor initializes an empty double-lined list.
-    clsDoubleLinkedList() = default;
-
-    void printList() const
+    class Node
     {
-        if (_dbList.empty())
+    public:
+        T value;
+        Node *next;
+        Node *prev;
+    };
+    Node *head = NULL;
+    Node *tail = NULL;
+
+    void print() const
+    {
+        if (head == NULL)
         {
-            cout << "The list is empty." << endl;
+            cout << "List is empty." << endl;
             return;
         }
 
-        for (const auto &item : _dbList)
-            cout << item << " - ";
+        Node *cur = head;
 
-        cout << endl;
+        while (cur != tail)
+        {
+            cout << cur->value << " ";
+            cur = cur->next;
+        }
     }
 };
-
 #endif // CLS_DOUBLE_LINKED_LIST_H
