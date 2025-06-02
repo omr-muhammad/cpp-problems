@@ -65,6 +65,26 @@ public:
         _size++;
     }
 
+    void insertAtEnd(const T &value)
+    {
+        Node *newNode = new Node;
+        newNode->value = value;
+        newNode->prev = tail;
+
+        if (head == nullptr)
+        {
+            head = tail = newNode;
+            // [next, prev] are initially nullptr
+        }
+        else
+        {
+            tail->next = newNode;
+            tail = newNode;
+        }
+
+        _size++;
+    }
+
     Node *find(const T &value) const
     {
         Node *cur = head;
