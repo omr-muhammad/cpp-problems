@@ -204,5 +204,25 @@ public:
         while (!isEmpty())
             deleteFirstNode();
     }
+
+    void reverse()
+    {
+        if (isEmpty())
+            return _displayEmptyList();
+
+        Node *cur = head;
+        while (cur != nullptr)
+        {
+            Node *temp = cur->next;
+            cur->next = cur->prev;
+            cur->prev = temp;
+            cur = temp;
+        }
+
+        // Swap head and tail
+        Node *temp = head;
+        head = tail;
+        tail = temp;
+    }
 };
 #endif // CLS_DOUBLE_LINKED_LIST_H
