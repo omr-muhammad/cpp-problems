@@ -15,11 +15,6 @@ class clsDoubleLinkedList
 private:
     int _size = 0;
 
-    bool _isEmpty() const
-    {
-        return head == nullptr;
-    }
-
     void _displayEmptyList() const
     {
         cout << "List is empty." << endl;
@@ -37,9 +32,19 @@ public:
     Node *head = nullptr;
     Node *tail = nullptr;
 
+    int size() const
+    {
+        return _size;
+    }
+
+    bool isEmpty() const
+    {
+        return head == nullptr;
+    }
+
     void print() const
     {
-        if (_isEmpty())
+        if (isEmpty())
             return _displayEmptyList();
 
         Node *cur = head;
@@ -130,10 +135,9 @@ public:
         return nullptr; // Not found 😢
     }
 
-    // Delete Node
     void deleteNode(Node *node)
     {
-        if (_isEmpty())
+        if (isEmpty())
             return _displayEmptyList();
 
         if (node == nullptr || find(node->value) == nullptr)
@@ -155,10 +159,9 @@ public:
         _size--;
     }
 
-    // Delete First Node
     void deleteFirstNode()
     {
-        if (_isEmpty())
+        if (isEmpty())
             return _displayEmptyList();
 
         if (head == tail)
@@ -176,10 +179,9 @@ public:
         --_size;
     }
 
-    // Delete Last Node
     void deleteLastNode()
     {
-        if (_isEmpty())
+        if (isEmpty())
             return _displayEmptyList();
 
         if (head == tail)
@@ -195,6 +197,12 @@ public:
             delete temp;
         }
         --_size;
+    }
+
+    void clear()
+    {
+        while (!isEmpty())
+            deleteFirstNode();
     }
 };
 #endif // CLS_DOUBLE_LINKED_LIST_H
