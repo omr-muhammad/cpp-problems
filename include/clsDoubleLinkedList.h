@@ -267,5 +267,16 @@ public:
 
         return node ? node->value : NULL;
     }
+
+    bool updateItem(int idx, const T &value)
+    {
+        Node *node = getNodeByIndex(idx);
+
+        if (node == nullptr)
+            return false;
+
+        node->value = value;
+        return true;
+    }
 };
 #endif // CLS_DOUBLE_LINKED_LIST_H
