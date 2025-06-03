@@ -97,6 +97,18 @@ public:
         _size++;
     }
 
+    void insertAfter(const int idx, const T &value)
+    {
+        Node *node = getNodeByIndex(idx);
+        if (node == nullptr)
+        {
+            cout << "Node not found." << endl;
+            return;
+        }
+
+        insertAfter(node, value);
+    }
+
     void insertAfter(Node *node, const T &value)
     {
         if (node == nullptr || find(node->value) == nullptr)
@@ -257,7 +269,6 @@ public:
     // optional<T> getValueByIndex(int idx) const
     // {
     //     Node *node = getNodeByIndex(idx);
-
     //     return node ? node->value : nullopt;
     // }
 
