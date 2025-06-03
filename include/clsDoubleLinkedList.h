@@ -15,6 +15,16 @@ class clsDoubleLinkedList
 private:
     int _size = 0;
 
+    bool _isEmpty() const
+    {
+        return head == nullptr;
+    }
+
+    void _displayEmptyList() const
+    {
+        cout << "List is empty." << endl;
+    }
+
 public:
     class Node
     {
@@ -29,11 +39,8 @@ public:
 
     void print() const
     {
-        if (head == nullptr)
-        {
-            cout << "List is empty." << endl;
-            return;
-        }
+        if (_isEmpty())
+            return _displayEmptyList();
 
         Node *cur = head;
 
@@ -121,6 +128,73 @@ public:
         }
 
         return nullptr; // Not found 😢
+    }
+
+    // Delete Node
+    void deleteNode(Node *node)
+    {
+        if (_isEmpty())
+            return _displayEmptyList();
+
+        if (node == nullptr || find(node->value) == nullptr)
+        {
+            cout << "Node not found." << endl;
+            return;
+        }
+
+        if (node == head)
+            return deleteFirstNode();
+
+        if (node == tail)
+            return deleteLastNode();
+
+        // Of course, node is neither head nor tail
+        node->prev->next = node->next;
+        node->next->prev = node->prev;
+        delete node;
+        _size--;
+    }
+
+    // Delete First Node
+    void deleteFirstNode()
+    {
+        if (_isEmpty())
+            return _displayEmptyList();
+
+        if (head == tail)
+        {
+            delete head;
+            head = tail = nullptr;
+        }
+        else
+        {
+            Node *temp = head;
+            head = head->next;
+            head->prev = nullptr;
+            delete temp;
+        }
+        --_size;
+    }
+
+    // Delete Last Node
+    void deleteLastNode()
+    {
+        if (_isEmpty())
+            return _displayEmptyList();
+
+        if (head == tail)
+        {
+            delete tail;
+            head = tail = nullptr;
+        }
+        else
+        {
+            Node *temp = tail;
+            tail = tail->prev;
+            tail->next = nullptr;
+            delete temp;
+        }
+        --_size;
     }
 };
 #endif // CLS_DOUBLE_LINKED_LIST_H
