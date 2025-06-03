@@ -224,5 +224,33 @@ public:
         head = tail;
         tail = temp;
     }
+
+    Node *getNodeByIndex(int idx) const
+    {
+        if (isEmpty())
+        {
+            _displayEmptyList();
+            return nullptr;
+        }
+
+        if (idx < 0 || idx >= _size)
+        {
+            cout << "Index out of bounds." << endl;
+            return nullptr;
+        }
+
+        // Determine if we should start from head or tail
+        bool afterMid = idx > _size / 2;
+        int count = afterMid ? _size - 1 : 0;
+        Node *cur = afterMid ? tail : head;
+
+        while (count != idx)
+        {
+            cur = afterMid ? cur->prev : cur->next;
+            count += afterMid ? -1 : 1;
+        }
+
+        return cur;
+    }
 };
 #endif // CLS_DOUBLE_LINKED_LIST_H
