@@ -252,5 +252,20 @@ public:
 
         return cur;
     }
+
+    // optional<T> for modern C++ versions
+    // optional<T> getValueByIndex(int idx) const
+    // {
+    //     Node *node = getNodeByIndex(idx);
+
+    //     return node ? node->value : nullopt;
+    // }
+
+    T getValueByIndex(int idx) const
+    {
+        Node *node = getNodeByIndex(idx);
+
+        return node ? node->value : NULL;
+    }
 };
 #endif // CLS_DOUBLE_LINKED_LIST_H
