@@ -117,6 +117,86 @@ public:
 
         _size--;
     }
-};
 
+    void insertAt(int idx, const T &value)
+    {
+        if (idx < 0 || idx > _size)
+        {
+            cout << "Index out of bounds." << endl;
+            return;
+        }
+
+        if (idx == 0)
+        {
+            pushFront(value);
+            return;
+        }
+
+        if (idx == _size)
+        {
+            pushBack(value);
+            return;
+        }
+
+        int count = 0;
+        Node *cur = head;
+        Node *newNode = new Node;
+        newNode->value = value;
+        while (cout < idx - 1)
+        {
+            cur = cur->next;
+            count++;
+        }
+
+        node->next = cur->next;
+        cur->next = newNode;
+        _size++;
+    }
+
+    void deleteAt(int idx)
+    {
+        if (idx < 0 || idx >= _size)
+        {
+            cout << "Index out of bounds." << endl;
+            return;
+        }
+
+        if (idx == 0)
+        {
+            popFront();
+            return;
+        }
+
+        if (idx == _size - 1)
+        {
+            popBack();
+            return;
+        }
+
+        int count = 0;
+        Node *cur = head;
+        while (count < idx - 1)
+        {
+            cur = cur->next;
+            count++;
+        }
+
+        Node *toDelete = cur->next;
+        cur->next = toDelete->next;
+        delete toDelete;
+        _size--;
+    }
+
+    Node *find(const T &value) const
+    {
+        Node *cur = head;
+        while (cur != nullptr)
+        {
+            if (cur->value == value)
+                return cur;
+            cur = cur->next;
+        }
+        return nullptr;
+    }
+};
 #endif // CLS_SINGLE_LINKED_LIST_H
