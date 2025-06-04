@@ -198,5 +198,15 @@ public:
         }
         return nullptr;
     }
+
+    bool isEmpty() const
+    {
+        return _size == 0;
+    }
+
+    int size() const
+    {
+        return _size;
+    }
 };
 #endif // CLS_SINGLE_LINKED_LIST_H
