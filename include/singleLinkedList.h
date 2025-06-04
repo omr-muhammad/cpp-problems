@@ -13,6 +13,8 @@ class clsSingleLinkedList
 {
 private:
     int _size = 0;
+    Node *_head = nullptr;
+    Node *_tail = nullptr;
 
     void _displayEmptyList() const
     {
@@ -40,6 +42,25 @@ public:
             cur = cur->next;
         }
         cout << endl;
+    }
+
+    void insertAtBeginning(const T &value)
+    {
+        // Setting up newNode
+        Node *newNode = new Node;
+        newNode->value = value;
+        newNode->next = head;
+
+        // Update List Nodes
+        head = newNode;
+
+        // If the list was empty, set tail to newNode
+        if (tail == nullptr)
+        {
+            tail = newNode;
+        }
+
+        _size++;
     }
 };
 
