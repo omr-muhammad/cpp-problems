@@ -79,6 +79,44 @@ public:
 
         _size++;
     }
+
+    void popFront()
+    {
+        if (isEmpty())
+            return _displayEmptyList();
+
+        Node *temp = head;
+        head = head->next;
+
+        if (head == nullptr)
+            tail = nullptr;
+
+        delete temp;
+        _size--;
+    }
+
+    void popBack()
+    {
+        if (isEmpty())
+            return _displayEmptyList();
+
+        if (head == tail)
+        {
+            delete head;
+            head = tail = nullptr;
+            return;
+        }
+
+        Node *cur = head;
+        while (cur->next != tail)
+            cur = cur->next;
+
+        delete tail;
+        tail = cur;
+        tail->next = nullptr;
+
+        _size--;
+    }
 };
 
 #endif // CLS_SINGLE_LINKED_LIST_H
