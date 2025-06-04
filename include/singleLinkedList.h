@@ -44,7 +44,7 @@ public:
         cout << endl;
     }
 
-    void insertAtBeginning(const T &value)
+    void pushFront(const T &value)
     {
         // Setting up newNode
         Node *newNode = new Node;
@@ -58,6 +58,23 @@ public:
         if (tail == nullptr)
         {
             tail = newNode;
+        }
+
+        _size++;
+    }
+
+    void pushBack(const T &value)
+    {
+        // Setting up newNode
+        Node *newNode = new Node;
+        newNode->value = value;
+
+        tail->next = newNode;
+        tail = newNode;
+
+        if (isEmpty())
+        {
+            head newNode;
         }
 
         _size++;
