@@ -34,7 +34,7 @@ public:
         if (isEmpty())
             return _displayEmptyList();
 
-        Node *cur = head;
+        Node *cur = _head;
 
         while (cur != nullptr)
         {
@@ -49,15 +49,15 @@ public:
         // Setting up newNode
         Node *newNode = new Node;
         newNode->value = value;
-        newNode->next = head;
+        newNode->next = _head;
 
         // Update List Nodes
-        head = newNode;
+        _head = newNode;
 
-        // If the list was empty, set tail to newNode
-        if (tail == nullptr)
+        // If the list was empty, set _tail to newNode
+        if (_tail == nullptr)
         {
-            tail = newNode;
+            _tail = newNode;
         }
 
         _size++;
@@ -69,12 +69,12 @@ public:
         Node *newNode = new Node;
         newNode->value = value;
 
-        tail->next = newNode;
-        tail = newNode;
+        _tail->next = newNode;
+        _tail = newNode;
 
         if (isEmpty())
         {
-            head newNode;
+            _head newNode;
         }
 
         _size++;
@@ -85,11 +85,11 @@ public:
         if (isEmpty())
             return _displayEmptyList();
 
-        Node *temp = head;
-        head = head->next;
+        Node *temp = _head;
+        _head = _head->next;
 
-        if (head == nullptr)
-            tail = nullptr;
+        if (_head == nullptr)
+            _tail = nullptr;
 
         delete temp;
         _size--;
@@ -100,20 +100,20 @@ public:
         if (isEmpty())
             return _displayEmptyList();
 
-        if (head == tail)
+        if (_head == _tail)
         {
-            delete head;
-            head = tail = nullptr;
+            delete _head;
+            _head = _tail = nullptr;
             return;
         }
 
-        Node *cur = head;
-        while (cur->next != tail)
+        Node *cur = _head;
+        while (cur->next != _tail)
             cur = cur->next;
 
-        delete tail;
-        tail = cur;
-        tail->next = nullptr;
+        delete _tail;
+        _tail = cur;
+        _tail->next = nullptr;
 
         _size--;
     }
@@ -139,7 +139,7 @@ public:
         }
 
         int count = 0;
-        Node *cur = head;
+        Node *cur = _head;
         Node *newNode = new Node;
         newNode->value = value;
         while (cout < idx - 1)
@@ -174,7 +174,7 @@ public:
         }
 
         int count = 0;
-        Node *cur = head;
+        Node *cur = _head;
         while (count < idx - 1)
         {
             cur = cur->next;
@@ -189,7 +189,7 @@ public:
 
     Node *find(const T &value) const
     {
-        Node *cur = head;
+        Node *cur = _head;
         while (cur != nullptr)
         {
             if (cur->value == value)
