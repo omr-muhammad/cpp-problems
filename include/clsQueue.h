@@ -76,6 +76,24 @@ public:
 
         return _list.back();
     }
+
+    optional<T> getItem(int idx) const
+    {
+        Node *node = _list.getItem(idx);
+
+        if (node == nullptr)
+        {
+            cout << "Not found!" << endl;
+            return nullopt;
+        }
+
+        return node->value;
+    }
+
+    void reverse()
+    {
+        _list.reverse();
+    }
 };
 
 #endif // CLS_QUEUE_H

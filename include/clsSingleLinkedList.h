@@ -219,6 +219,29 @@ public:
         return nullptr;
     }
 
+    Node *getItem(int idx) const
+    {
+        if (idx < 0 || idx >= _size)
+        {
+            cout << "Index out of bounds." << endl;
+            return nullptr;
+        }
+
+        if (isEmpty())
+        {
+            _displayEmptyList();
+            return nullptr;
+        }
+
+        Node *cur = _head;
+        for (int i = 0; i < idx; ++i)
+        {
+            cur = cur->next;
+        }
+
+        return cur;
+    }
+
     bool isEmpty() const
     {
         return _size == 0;
@@ -233,6 +256,24 @@ public:
     {
         while (!isEmpty())
             popFront();
+    }
+
+    void reverse()
+    {
+        Node *cur = _head;
+        Node *prev = nullptr;
+
+        _tail = _head;
+
+        while (cur != nullptr)
+        {
+            Node *nxt = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = nxt;
+        }
+
+        _head = prev;
     }
 };
 #endif // CLS_SINGLE_LINKED_LIST_H
