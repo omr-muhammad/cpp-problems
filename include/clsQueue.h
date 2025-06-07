@@ -102,6 +102,26 @@ public:
         if (item != nullptr)
             item->value = newValue;
     }
+
+    void insertAfter(int idx, T &value)
+    {
+        _list.insertAt(idx + 1, value);
+    }
+
+    void insertAtFront(T &value)
+    {
+        _list.pushFront(value);
+    }
+
+    void insertAtEnd(T &value)
+    {
+        _list.pushBack(value);
+    }
+
+    void clear()
+    {
+        _list.clear();
+    }
 };
 
 #endif // CLS_QUEUE_H
