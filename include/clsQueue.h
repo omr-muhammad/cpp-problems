@@ -79,7 +79,7 @@ public:
 
     optional<T> getItem(int idx) const
     {
-        Node *node = _list.getItem(idx);
+        clsSingleLinkedList::Node *node = _list.getItem(idx);
 
         if (node == nullptr)
         {
@@ -93,6 +93,14 @@ public:
     void reverse()
     {
         _list.reverse();
+    }
+
+    void updateItem(int idx, T &newValue)
+    {
+        clsSingleLinkedList::Node *item = _list.getItem(idx);
+
+        if (item != nullptr)
+            item->value = newValue;
     }
 };
 
