@@ -97,7 +97,7 @@ public:
 
     void updateItem(int idx, T &newValue)
     {
-        clsSingleLinkedList::Node *item = _list.getItem(idx);
+        clsSingleLinkedList::Node *item = _list.getNode(idx);
 
         if (item != nullptr)
             item->value = newValue;

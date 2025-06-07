@@ -219,7 +219,7 @@ public:
         return nullptr;
     }
 
-    Node *getItem(int idx) const
+    Node *getNode(int idx) const
     {
         if (idx < 0 || idx >= _size)
         {
