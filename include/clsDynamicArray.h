@@ -79,7 +79,23 @@ public:
     void reverse()
     {
         for (size_t i = 0; i < _size; ++i)
-            swap(_dArr[i], _dArr[_size - i]);
+            swap(_dArr[i], _dArr[_size - i - 1]);
+    }
+
+    bool removeAt(size_t idx)
+    {
+        if (idx >= _size)
+            return false;
+
+        T *newArr = new T[_size - 1];
+        for (size_t i = 0, j = 0; i < _size; ++i)
+            if (i != idx)
+                newArr[j++] = _dArr[i];
+
+        delete[] _dArr;
+        _dArr = newArr;
+        --_size;
+        return true;
     }
 };
 
