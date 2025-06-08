@@ -30,6 +30,28 @@ public:
     {
         return _size;
     }
+
+    void print()
+    {
+        for (size_t i = 0; i < _size; i++)
+            cout << _dArr[i] << "  ";
+
+        cout << '\n';
+    }
+
+    bool setItem(size_t idx, T newItem)
+    {
+        if (idx < 0 || idx >= _size)
+            return false;
+
+        _dArr[idx] = newItem;
+        return true;
+    }
+
+    bool isEmpty()
+    {
+        return _size <= 0;
+    }
 };
 
 #endif // CLS_DYNAMIC_ARRAY_H
