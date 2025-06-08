@@ -97,6 +97,16 @@ public:
         --_size;
         return true;
     }
+
+    bool removeFirst()
+    {
+        return removeAt(0);
+    }
+
+    bool removeLast()
+    {
+        return removeAt(_size - 1);
+    }
 };
 
 #endif // CLS_DYNAMIC_ARRAY_H
