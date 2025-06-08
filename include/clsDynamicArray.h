@@ -10,7 +10,7 @@ class clsDynamicArray
 {
 private:
     size_t _size = 0;
-    T *_dArr;
+    T *_dArr = nullptr;
 
 public:
     clsDynamicArray(size_t size = 0)
@@ -51,6 +51,21 @@ public:
     bool isEmpty()
     {
         return _size <= 0;
+    }
+
+    void resize(size_t newSize)
+    {
+        if (newSize == _size)
+            return;
+
+        size_t minSize = newSize < _size ? newSize : _size;
+        T *newArr = new T[minSize];
+        for (size_t i = 0; i < minSize; ++i)
+            newArr[i] = _dArr[i];
+
+        delete[] _dArr;
+        _dArr = newArr;
+        _size = minSize;
     }
 };
 
