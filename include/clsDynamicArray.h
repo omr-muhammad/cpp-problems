@@ -4,6 +4,9 @@
 #define CLS_DYNAMIC_ARRAY_H
 
 #include <iostream>
+#include <optional>
+
+using namespace std;
 
 template <typename T>
 class clsDynamicArray
@@ -41,7 +44,7 @@ public:
 
     bool setItem(size_t idx, T newItem)
     {
-        if (idx < 0 || idx >= _size)
+        if (idx >= _size)
             return false;
 
         _dArr[idx] = newItem;
@@ -66,6 +69,17 @@ public:
         delete[] _dArr;
         _dArr = newArr;
         _size = minSize;
+    }
+
+    optional<T> getItem(size_t idx)
+    {
+        return idx >= _size ? nullopt : _dArr[idx];
+    }
+
+    void reverse()
+    {
+        for (size_t i = 0; i < _size; ++i)
+            swap(_dArr[i], _dArr[_size - i]);
     }
 };
 
