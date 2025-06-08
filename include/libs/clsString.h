@@ -63,7 +63,7 @@ public:
 
     static string lowerStr(string text)
     {
-        for (int i = 0; i < text.length(); i++)
+        for (size_t i = 0; i < text.length(); i++)
             text[i] = tolower(text[i]);
 
         return text;
@@ -71,7 +71,7 @@ public:
 
     static string upperStr(string text)
     {
-        for (int i = 0; i < text.length(); i++)
+        for (size_t i = 0; i < text.length(); i++)
             text[i] = toupper(text[i]);
 
         return text;
@@ -81,7 +81,7 @@ public:
     {
         text[0] = toupper(text[0]);
 
-        for (int i = 1; i < text.length(); i++)
+        for (size_t i = 1; i < text.length(); i++)
             text[i] = tolower(text[i]);
 
         return text;
@@ -90,7 +90,7 @@ public:
     static string encryptText(string text)
     {
         string encryptedText = "";
-        for (int i = 0; i < text.length(); i++)
+        for (size_t i = 0; i < text.length(); i++)
         {
             int encryptOperation = int(text[i]) + i * 2;
             encryptedText += char(encryptOperation);
@@ -102,7 +102,7 @@ public:
     static string decryptText(string text)
     {
         string decryptedText = "";
-        for (int i = 0; i < text.length(); i++)
+        for (size_t i = 0; i < text.length(); i++)
         {
             int decryptOperation = int(text[i]) - i * 2;
             decryptedText += char(decryptOperation);
