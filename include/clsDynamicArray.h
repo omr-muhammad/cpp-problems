@@ -107,6 +107,15 @@ public:
     {
         return removeAt(_size - 1);
     }
+
+    int find(T item)
+    {
+        for (size_t i = 0; i < _size; ++i)
+            if (_dArr[i] == item)
+                return i;
+
+        return -1;
+    }
 };
 
 #endif // CLS_DYNAMIC_ARRAY_H
