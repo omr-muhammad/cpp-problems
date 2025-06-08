@@ -42,7 +42,7 @@ public:
 
     optional<T> getItem(int idx)
     {
-        clsSingleLinkedList::Node node = _list.getNode(idx);
+        typename clsSingleLinkedList::Node *node = _list.getNode(idx);
 
         if (node != nullptr)
             return node->value;
@@ -57,7 +57,7 @@ public:
 
     void updateItem(int idx, T &newValue)
     {
-        clsSingleLinkedList::Node node = _list.getNode(idx);
+        typename clsSingleLinkedList::Node *node = _list.getNode(idx);
 
         if (node != nullptr)
             node->value = newValue;
