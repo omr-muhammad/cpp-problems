@@ -44,15 +44,15 @@ public:
         _list.pushBack(value);
     }
 
-    void dequeue()
+    optional<T> dequeue()
     {
         if (_list.isEmpty())
-            return _displayEmptyQueue();
         {
-            return _list.isEmpty();
+            _displayEmptyQueue();
+            return nullopt;
         }
 
-        _list.popFront();
+        return _list.popFront();
     }
 
     optional<T> front() const

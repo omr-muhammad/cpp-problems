@@ -35,9 +35,9 @@ public:
         _list.front();
     }
 
-    void pop()
+    optional<T> pop()
     {
-        _list.popBack();
+        return _list.popBack();
     }
 
     optional<T> getItem(int idx)
