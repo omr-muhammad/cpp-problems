@@ -22,7 +22,7 @@ public:
 
     void push(T &value)
     {
-        _list.pushBack(value);
+        _list.pushFront(value);
     }
 
     optional<T> top()
@@ -66,11 +66,6 @@ public:
     void insertAfter(int idx, T &value)
     {
         _list.insertAt(idx + 1, value);
-    }
-
-    void insertAtFront(T &value)
-    {
-        _list.pushFront(value);
     }
 
     void insertAtBack(T &value)
