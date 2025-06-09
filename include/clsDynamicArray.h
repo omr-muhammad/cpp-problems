@@ -137,6 +137,26 @@ public:
         ++_size;
         return true;
     }
+
+    bool insertAtBeginning(T value)
+    {
+        return insertAt(0, value);
+    }
+
+    bool insertAtEnd(T value)
+    {
+        return insertAt(_size, value);
+    }
+
+    bool insertAfter(size_t idx, T value)
+    {
+        return insertAt(++idx, value);
+    }
+
+    bool insertBefore(size_t idx, T value)
+    {
+        return insertAt(--idx, value);
+    }
 };
 
 #endif // CLS_DYNAMIC_ARRAY_H
