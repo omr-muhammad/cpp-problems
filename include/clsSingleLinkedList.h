@@ -100,11 +100,15 @@ public:
         _size++;
     }
 
-    void popFront()
+    optional<T> popFront()
     {
         if (isEmpty())
-            return _displayEmptyList();
+        {
+            _displayEmptyList();
+            return nullopt;
+        }
 
+        T deletedValue = _head->value;
         Node *temp = _head;
         _head = _head->next;
 
@@ -113,29 +117,38 @@ public:
 
         delete temp;
         _size--;
+        return deletedValue;
     }
 
-    void popBack()
+    optional<T> popBack()
     {
         if (isEmpty())
-            return _displayEmptyList();
+        {
+            _displayEmptyList();
+            return nullopt;
+        }
+
+        T deletedValue = nullopt;
 
         if (_head == _tail)
         {
+            deletedValue = _head->value;
             delete _head;
             _head = _tail = nullptr;
-            return;
+            return deletedValue;
         }
 
         Node *cur = _head;
         while (cur->next != _tail)
             cur = cur->next;
 
+        deletedValue = _tail->value;
         delete _tail;
         _tail = cur;
         _tail->next = nullptr;
 
         _size--;
+        return deletedValue;
     }
 
     void insertAt(int idx, const T &value)
