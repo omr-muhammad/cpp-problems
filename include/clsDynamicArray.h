@@ -116,6 +116,27 @@ public:
 
         return -1;
     }
+
+    bool insertAt(size_t idx, T value)
+    {
+        if (idx > _size)
+            return false;
+
+        T *newArr = new T[_size + 1];
+        for (size_t i = 0, j = 0; i <= _size; ++i)
+        {
+            if (i == idx)
+                newArr[j++] = value;
+
+            if (i != _size)
+                newArr[j++] = _dArr[i];
+        }
+
+        delete[] _dArr;
+        _dArr = newArr;
+        ++_size;
+        return true;
+    }
 };
 
 #endif // CLS_DYNAMIC_ARRAY_H
