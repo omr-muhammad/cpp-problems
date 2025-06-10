@@ -39,7 +39,7 @@ public:
         setValue(newValue);
     }
 
-    void reUndo()
+    void redo()
     {
         if (_reUndoStack.size() <= 0)
             return;
