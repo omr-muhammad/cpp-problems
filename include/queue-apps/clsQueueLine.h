@@ -46,6 +46,16 @@ private:
             cout << curTkt.id;
     }
 
+    void _printTkt(const stTicket &tkt)
+    {
+        cout << "\n\t\t\t  _______________________\n";
+        cout << "\n\t\t\t\t    " << tkt.id;
+        cout << "\n\n\t\t\t    " << tkt.issuedDate << '  -  ' << tkt.issuedTime;
+        cout << "\n\t\t\t    Wating Clients:  " << tkt.waitingClients;
+        cout << "\n\t\t\t      Estimated Time: " << tkt.waitingTime << " Minutes.";
+        cout << "\n\t\t\t  _______________________\n";
+    }
+
 public:
     struct stTicket
     {
@@ -111,7 +121,22 @@ public:
 
         _getTktAndPrint(idx);
 
-        cout << (idx != 0) ? "     -->     " : "\n";
+        if (idx != 0)
+            cout << "     -->     ";
+        else
+            cout << "\n";
+    }
+
+    void printAllTkts()
+    {
+        for (int i = 0; i < _queueLine.size(); ++i)
+        {
+            stTicket emptyTkt;
+            stTicket curTkt = _queueLine.getItem(i).value_or(emptyTkt);
+
+            if (!curTkt.id.empty())
+                _printTkt(curTkt);
+        }
     }
 };
 
