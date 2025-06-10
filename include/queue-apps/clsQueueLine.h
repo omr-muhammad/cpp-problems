@@ -9,17 +9,19 @@
 #include "clsQueue.h"
 #include "clsDate.h"
 
+using namespace std;
+
 class clsQueueLine
 {
 private:
-    class clsTicket;
+    struct stTicket;
 
     string _prefix;
     double _estTime;
     int _totalTkts = 0, _servedClients = 0, _waitingClients = 0;
-    clsQueue<clsTicket> _queueLine;
+    clsQueue<stTicket> _queueLine;
 
-    void _initTicket(clsTicket &tkt)
+    void _initTicket(stTicket &tkt)
     {
         clsDate date;
 
@@ -30,10 +32,23 @@ private:
         tkt.waitingTime = _waitingClients * _estTime;
     }
 
-public:
-    class clsTicket
+    void _printEmptyLine()
     {
-    public:
+        cout << "Line is Empty!\n";
+    }
+
+    void _getTktAndPrint(int idx)
+    {
+        stTicket emptyTkt;
+        stTicket curTkt = _queueLine.getItem(idx).value_or(emptyTkt);
+
+        if (!curTkt.id.empty())
+            cout << curTkt.id;
+    }
+
+public:
+    struct stTicket
+    {
         string id;
         string issuedDate;
         string issuedTime;
@@ -45,7 +60,7 @@ public:
     void issueTkt()
     {
         // Prepare the ticket
-        clsTicket tkt;
+        stTicket tkt;
         _initTicket(tkt);
 
         // Updating Queue
@@ -65,6 +80,38 @@ public:
         cout << "\n\t\t\t    Wating Clients  = " << _waitingClients;
         cout << "\n\t\t\t _________________________\n";
         cout << "\n";
+    }
+
+    void printTktLineRTL()
+    {
+        if (_queueLine.size() == 0)
+            return _printEmptyLine();
+
+        cout << "Tickets: ";
+        for (int i = 0; i < _queueLine.size(); ++i)
+        {
+            _getTktAndPrint(i);
+            if (i < _queueLine.size() - 1)
+                cout << "     <--     ";
+        }
+
+        cout << endl;
+    }
+
+    void printTktLineLTR(int idx = 0)
+    {
+        if (_queueLine.size() == 0)
+            return _printEmptyLine();
+
+        if (idx < _queueLine.size() - 1)
+            printTktLineLTR(++idx);
+
+        if (idx == _queueLine.size() - 1)
+            cout << "Tickets:    ";
+
+        _getTktAndPrint(idx);
+
+        cout << (idx != 0) ? "     -->     " : "\n";
     }
 };
 
