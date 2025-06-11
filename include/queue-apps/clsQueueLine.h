@@ -13,13 +13,22 @@ using namespace std;
 
 class clsQueueLine
 {
-private:
-    struct stTicket;
+public:
+    struct stTicket
+    {
+        string id;
+        string issuedDate;
+        string issuedTime;
+        int waitingClients;
+        double waitingTime;
+    };
 
+private:
     string _prefix;
     double _estTime;
     int _totalTkts = 0, _servedClients = 0, _waitingClients = 0;
     clsQueue<stTicket> _queueLine;
+    stTicket _emptyTkt;
 
     void _initTicket(stTicket &tkt)
     {
@@ -39,8 +48,7 @@ private:
 
     void _getTktAndPrint(int idx)
     {
-        stTicket emptyTkt;
-        stTicket curTkt = _queueLine.getItem(idx).value_or(emptyTkt);
+        stTicket curTkt = _queueLine.getItem(idx).value_or(_emptyTkt);
 
         if (!curTkt.id.empty())
             cout << curTkt.id;
@@ -56,15 +64,24 @@ private:
         cout << "\n\t\t\t  _______________________\n";
     }
 
-public:
-    struct stTicket
+    void _updateTkt(stTicket &tkt)
     {
-        string id;
-        string issuedDate;
-        string issuedTime;
-        int waitingClients;
-        double waitingTime;
-    };
+        tkt.waitingClients = _waitingClients;
+        tkt.waitingTime = _waitingClients * _estTime;
+    }
+
+    void _updateTktsData()
+    {
+        for (int i = 0; i < _queueLine.size(); ++i)
+        {
+            stTicket curTkt = _queueLine.getItem(i).value_or(_emptyTkt);
+
+            if (!curTkt.id.empty())
+                _updateTkt(curTkt);
+        }
+    }
+
+public:
     clsQueueLine(string prefix, double estTime) : _prefix(prefix), _estTime(estTime) {}
 
     void issueTkt()
@@ -77,6 +94,23 @@ public:
         _queueLine.enqueue(tkt);
         _totalTkts++;
         _waitingClients++;
+    }
+
+    bool serveClient()
+    {
+        try
+        {
+            _queueLine.dequeue();
+            _servedClients++;
+            _waitingClients--;
+            _updateTktsData();
+            return true;
+        }
+        catch (const std::exception &e)
+        {
+            cerr << e.what() << '\n';
+            return false;
+        }
     }
 
     void printInfo()
@@ -131,8 +165,7 @@ public:
     {
         for (int i = 0; i < _queueLine.size(); ++i)
         {
-            stTicket emptyTkt;
-            stTicket curTkt = _queueLine.getItem(i).value_or(emptyTkt);
+            stTicket curTkt = _queueLine.getItem(i).value_or(_emptyTkt);
 
             if (!curTkt.id.empty())
                 _printTkt(curTkt);
